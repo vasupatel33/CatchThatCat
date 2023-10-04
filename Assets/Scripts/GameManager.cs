@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     bool flag;
     int no = 1;
     public int middlePoint;
-    private static GameManager instance;
+    public static GameManager instance;
     
     void Start()
     {
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
             }
             flag = !flag;
         }
-        ParentObj.transform.position = new Vector3(-4.5f,-4.5f,0);
+        ParentObj.transform.position = new Vector3(-5.4f,-5.5f,0);
         MiddlePoint();
         //int no = 0; // Initialize 'no' to some value
         //float hexWidth = 0.9f; // Width of a singal hexagon
