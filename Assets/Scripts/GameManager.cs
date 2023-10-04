@@ -7,43 +7,33 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject HexagonObj, ParentObj;
     [SerializeField] List<GameObject> AllHexagon,evenObject, oddObject;
     bool flag;
-    int no=0,middlePoint;
-    GameObject game;
+    int no = 1;
+    public int middlePoint;
+    private static GameManager instance;
+    
     void Start()
     {
-        middlePoint = 60;
-        for (int i = 0; i < 11; i++)
+        instance = this;
+        //middlePoint = 60;
+        for (int i = 1; i <= 11; i++)
         {
-            for (int j = 0; j < 11; j++)
+            for (int j = 1; j <= 11; j++)
             {
-                Vector3 spawnobj = new Vector3(j * 0.9f, i * 0.9f, 0);
-                if (!flag)
-                {
-                    spawnobj = new Vector3(j * 0.9f, i * 0.9f, 0);
-                }
-                else
-                {
-                    spawnobj = new Vector3(0.45f + (j * 0.9f), i * 0.9f, 0);
-                }
-                //GameObject.Instantiate(HexagonObj, spawnPosition, Quaternion.identity,ParentObj.transform);
-                game = Instantiate(HexagonObj, spawnobj, Quaternion.identity, ParentObj.transform);
+                GameObject game = Instantiate(HexagonObj ,ParentObj.transform);
                 AllHexagon.Add(game);
-
+                game.name = no.ToString();
+                no++;
                 if (!flag)
                 {
-                    //GameObject obj = Instantiate(HexagonObj, spawnobj, Quaternion.identity, ParentObj.transform);
-                    //AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-                    //AllHexagon[middlePoint - 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+                    HexagonObj.transform.position = new Vector3(j * 0.9f, i * 0.9f, 0);
                     evenObject.Add(game);
                 }
                 else
                 {
-                    spawnobj = new Vector3(0.45f + (j * 0.9f), i * 0.9f, 0);
-                    //GameObject obj1 = Instantiate(HexagonObj, spawnobj, Quaternion.identity, ParentObj.transform);
+                    HexagonObj.transform.position = new Vector3(0.5f + (j * 0.9f), i * 0.9f, 0);
                     oddObject.Add(game);
                 }
-                HexagonObj.gameObject.name = no.ToString();
-                no++;
+                
             }
             flag = !flag;
         }
@@ -80,8 +70,26 @@ public class GameManager : MonoBehaviour
     }
     public void MiddlePoint()
     {
-        middlePoint = 60;
+        middlePoint = 54;
 
         AllHexagon[middlePoint].gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+        if (oddObject.Contains(AllHexagon[middlePoint]))
+        {
+            AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 12].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 10].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+        else
+        {
+            AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 10].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 12].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+        }
     }
 }
