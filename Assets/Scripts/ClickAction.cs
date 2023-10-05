@@ -5,12 +5,10 @@ using UnityEngine;
 
 public class ClickAction : MonoBehaviour
 {
-    public int a;
+    //public int a;
     private void OnMouseUp()
     {
         Debug.Log("current Obj is = "+gameObject.name);
-    
-        Debug.Log("Middle Point is = " + GameManager.instance.middlePoint);
-        //GameManager.instance.middlePoint = 
+        GameManager.instance.ClickedObjectFun(this.gameObject);
     }
 }
