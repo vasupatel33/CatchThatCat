@@ -352,6 +352,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HexagonObj: {fileID: 8948104200049467836, guid: 984e3a1340e61704198aa41e1cb60149, type: 3}
   ParentObj: {fileID: 300613645}
+  AllHexagon: []
+  evenObject: []
+  oddObject: []
+  clickedObjectList: []
+  PossibilityObjectList: []
+  middlePoint: 0
 --- !u!4 &955703904
 Transform:
   m_ObjectHideFlags: 0

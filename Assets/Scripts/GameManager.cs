@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -21,7 +22,9 @@ public class GameManager : MonoBehaviour
             {
                 GameObject game = Instantiate(HexagonObj, ParentObj.transform);
                 AllHexagon.Add(game);
+                
                 game.name = no.ToString();
+                AllHexagon[no].gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
                 no++;
                 if (!flag)
                 {
@@ -33,7 +36,6 @@ public class GameManager : MonoBehaviour
                     HexagonObj.transform.position = new Vector3(0.5f + (j * 0.9f), i * 0.9f, 0);
                     oddObject.Add(game);
                 }
-
             }
             flag = !flag;
         }
@@ -71,7 +73,11 @@ public class GameManager : MonoBehaviour
     public void MiddlePoint()
     {
         AllHexagon[middlePoint].gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+        AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled= false;
+
         PossibilityObjectList.Clear();
+        
+
         if (oddObject.Contains(AllHexagon[middlePoint]))
         {
             //AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
@@ -104,6 +110,7 @@ public class GameManager : MonoBehaviour
             PossibilityObjectList.Add(AllHexagon[middlePoint - 12]);
             PossibilityObjectList.Add(AllHexagon[middlePoint - 11]);
         }
+        CheckObject();
     }
     public void ClickedObjectFun(GameObject clickedObj)
     {
@@ -111,20 +118,43 @@ public class GameManager : MonoBehaviour
         clickedObj.GetComponent<PolygonCollider2D>().enabled = false;
         clickedObj.GetComponent<SpriteRenderer>().color = Color.gray;
         CheckObject();
+        CatMove();
     }
+    //public void CheckObject()
+    //{
+    //    for (int i = 0; i < PossibilityObjectList.Count; i++)
+    //    {
+    //        if (clickedObjectList.Contains(PossibilityObjectList[i]))
+    //        {
+    //            Debug.Log("Value deleted = " + PossibilityObjectList[i]);
+    //            PossibilityObjectList.Remove(PossibilityObjectList[i]);
+    //        }
+    //    }
+    //}
+    List<GameObject> itemsToRemove = new List<GameObject>();
+    List<GameObject> itemsToRemoves;
     public void CheckObject()
     {
         for (int i = 0; i < PossibilityObjectList.Count; i++)
         {
             if (clickedObjectList.Contains(PossibilityObjectList[i]))
             {
-                PossibilityObjectList.Remove(PossibilityObjectList[i]);
+                Debug.Log("Value deleted = " + PossibilityObjectList[i]);
+                itemsToRemove.Add(PossibilityObjectList[i]);
             }
         }
-        CatMove();
+
+        foreach (GameObject item in itemsToRemove)
+        {
+            PossibilityObjectList.Remove(item);
+        }
     }
+
     public void CatMove()
     {
+        AllHexagon[middlePoint].gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+        AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+        //CheckObject();
         int val = Random.Range(0, PossibilityObjectList.Count);
         middlePoint = int.Parse(PossibilityObjectList[val].gameObject.name);
         Debug.Log("Midle point is = " + middlePoint);
