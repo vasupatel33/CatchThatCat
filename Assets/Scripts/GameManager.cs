@@ -5,21 +5,21 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject HexagonObj, ParentObj;
-    [SerializeField] List<GameObject> AllHexagon,evenObject, oddObject, clickedObjectList, PossibilityObjectList;
+    [SerializeField] List<GameObject> AllHexagon, evenObject, oddObject, clickedObjectList, PossibilityObjectList;
     bool flag;
     int no = 0;
     public int middlePoint;
     public static GameManager instance;
-    
+
     void Start()
     {
+        middlePoint = 60;
         instance = this;
-        //middlePoint = 60;
         for (int i = 1; i <= 11; i++)
         {
             for (int j = 1; j <= 11; j++)
             {
-                GameObject game = Instantiate(HexagonObj ,ParentObj.transform);
+                GameObject game = Instantiate(HexagonObj, ParentObj.transform);
                 AllHexagon.Add(game);
                 game.name = no.ToString();
                 no++;
@@ -33,11 +33,11 @@ public class GameManager : MonoBehaviour
                     HexagonObj.transform.position = new Vector3(0.5f + (j * 0.9f), i * 0.9f, 0);
                     oddObject.Add(game);
                 }
-                
+
             }
             flag = !flag;
         }
-        ParentObj.transform.position = new Vector3(-5.4f,-5.5f,0);
+        ParentObj.transform.position = new Vector3(-5.4f, -5.5f, 0);
         MiddlePoint();
         //int no = 0; // Initialize 'no' to some value
         //float hexWidth = 0.9f; // Width of a singal hexagon
@@ -70,9 +70,8 @@ public class GameManager : MonoBehaviour
     }
     public void MiddlePoint()
     {
-        middlePoint = 66;
-        
         AllHexagon[middlePoint].gameObject.GetComponent<SpriteRenderer>().color = Color.black;
+        PossibilityObjectList.Clear();
         if (oddObject.Contains(AllHexagon[middlePoint]))
         {
             //AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
@@ -110,6 +109,7 @@ public class GameManager : MonoBehaviour
     {
         clickedObjectList.Add(clickedObj);
         clickedObj.GetComponent<PolygonCollider2D>().enabled = false;
+        clickedObj.GetComponent<SpriteRenderer>().color = Color.gray;
         CheckObject();
     }
     public void CheckObject()
@@ -121,6 +121,14 @@ public class GameManager : MonoBehaviour
                 PossibilityObjectList.Remove(PossibilityObjectList[i]);
             }
         }
+        CatMove();
     }
-
+    public void CatMove()
+    {
+        int val = Random.Range(0, PossibilityObjectList.Count);
+        middlePoint = int.Parse(PossibilityObjectList[val].gameObject.name);
+        Debug.Log("Midle point is = " + middlePoint);
+        AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        MiddlePoint();
+    }
 }
