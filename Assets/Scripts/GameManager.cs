@@ -26,6 +26,12 @@ public class GameManager : MonoBehaviour
                 game.name = no.ToString();
                 AllHexagon[no].gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
                 no++;
+                if(i==1 || i==11 || j==2 || j==1)
+                {
+                    game.GetComponent<SpriteRenderer>().color = Color.blue;
+                    game.tag = "Border";
+                }
+
                 if (!flag)
                 {
                     HexagonObj.transform.position = new Vector3(j * 0.9f, i * 0.9f, 0);
@@ -160,5 +166,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("Midle point is = " + middlePoint);
         AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = false;
         MiddlePoint();
+        if (AllHexagon[middlePoint].CompareTag("Border"))
+        {
+            Debug.Log("Game overr");
+        }
     }
 }
