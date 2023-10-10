@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] GameObject HexagonObj, ParentObj, winPanel;
     [SerializeField] List<GameObject> AllHexagon, evenObject, oddObject, clickedObjectList, PossibilityObjectList;
+    [SerializeField] Animator CatAnimator;
+    [SerializeField] GameObject CatCharacter;
+
     bool flag;
     int no = 0;
     public int middlePoint;
@@ -156,15 +158,75 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //public void CatMove()
+    //{
+    //    AllHexagon[middlePoint].gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+    //    AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+    //    //CheckObject();
+    //    int val = Random.Range(0, PossibilityObjectList.Count);
+    //    middlePoint = int.Parse(PossibilityObjectList[val].gameObject.name);
+    //    Debug.Log("Midle point is = " + middlePoint);
+    //    AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+    //    CatCharacter.transform.position = AllHexagon[middlePoint].transform.position;
+    //    CatAnimator.SetTrigger("Jump");
+    //    if (AllHexagon[middlePoint].CompareTag("Border"))
+    //    {
+    //        Debug.Log("Game overr");
+    //        winPanel.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        MiddlePoint();
+    //    }
+    //}
+    private bool isMoving = false; 
+
     public void CatMove()
     {
-        AllHexagon[middlePoint].gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
-        AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = true;
-        //CheckObject();
-        int val = Random.Range(0, PossibilityObjectList.Count);
-        middlePoint = int.Parse(PossibilityObjectList[val].gameObject.name);
-        Debug.Log("Midle point is = " + middlePoint);
-        AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = false;
+        if (!isMoving)
+        {
+            // Calculate the new position for the cat
+            AllHexagon[middlePoint].gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+            AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = true;
+            int val = Random.Range(0, PossibilityObjectList.Count);
+            middlePoint = int.Parse(PossibilityObjectList[val].gameObject.name);
+            Vector3 targetPosition = AllHexagon[middlePoint].transform.position;
+
+            // Start the jump animation coroutine
+            StartCoroutine(PlayJumpAnimation(targetPosition));
+        }
+    }
+
+    private IEnumerator PlayJumpAnimation(Vector3 targetPosition)
+    {
+        isMoving = true; // Set the flag to indicate that the cat is moving
+
+        // Trigger the jump animation
+        CatAnimator.SetTrigger("Jump");
+
+        // Wait for a brief moment to allow the jump animation to start
+        yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
+
+        // Move the cat to the new position (you can use physics-based or keyframe animation here)
+        float jumpDuration = 0.7f; // Adjust the jump duration
+        float elapsedTime = 0;
+        Vector3 initialPosition = CatCharacter.transform.position;
+
+        while (elapsedTime < jumpDuration)
+        {
+            float t = elapsedTime / jumpDuration;
+            CatCharacter.transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the cat reaches the exact target position
+        CatCharacter.transform.position = targetPosition;
+
+        // Reset the flag
+        isMoving = false;
+
+        // Check if the cat reached a border
         if (AllHexagon[middlePoint].CompareTag("Border"))
         {
             Debug.Log("Game overr");
@@ -175,4 +237,6 @@ public class GameManager : MonoBehaviour
             MiddlePoint();
         }
     }
+
+
 }
