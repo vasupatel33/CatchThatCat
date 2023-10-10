@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject HexagonObj, ParentObj;
+    [SerializeField] GameObject HexagonObj, ParentObj, winPanel;
     [SerializeField] List<GameObject> AllHexagon, evenObject, oddObject, clickedObjectList, PossibilityObjectList;
     bool flag;
     int no = 0;
@@ -138,7 +138,7 @@ public class GameManager : MonoBehaviour
     //    }
     //}
     List<GameObject> itemsToRemove = new List<GameObject>();
-    List<GameObject> itemsToRemoves;
+    bool win;
     public void CheckObject()
     {
         for (int i = 0; i < PossibilityObjectList.Count; i++)
@@ -165,10 +165,14 @@ public class GameManager : MonoBehaviour
         middlePoint = int.Parse(PossibilityObjectList[val].gameObject.name);
         Debug.Log("Midle point is = " + middlePoint);
         AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = false;
-        MiddlePoint();
         if (AllHexagon[middlePoint].CompareTag("Border"))
         {
             Debug.Log("Game overr");
+            winPanel.SetActive(true);
+        }
+        else
+        {
+            MiddlePoint();
         }
     }
 }
