@@ -196,46 +196,51 @@ public class GameManager : MonoBehaviour
             StartCoroutine(PlayJumpAnimation(targetPosition));
         }
     }
-
+    bool winn;
     private IEnumerator PlayJumpAnimation(Vector3 targetPosition)
     {
-        isMoving = true; // Set the flag to indicate that the cat is moving
-
-        // Trigger the jump animation
-        CatAnimator.SetTrigger("Jump");
-
-        // Wait for a brief moment to allow the jump animation to start
-        yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
-
-        // Move the cat to the new position (you can use physics-based or keyframe animation here)
-        float jumpDuration = 0.7f; // Adjust the jump duration
-        float elapsedTime = 0;
-        Vector3 initialPosition = CatCharacter.transform.position;
-
-        while (elapsedTime < jumpDuration)
+        if(winn)
         {
-            float t = elapsedTime / jumpDuration;
-            CatCharacter.transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        // Ensure the cat reaches the exact target position
-        CatCharacter.transform.position = targetPosition;
-
-        // Reset the flag
-        isMoving = false;
-
-        // Check if the cat reached a border
-        if (AllHexagon[middlePoint].CompareTag("Border"))
-        {
-            Debug.Log("Game overr");
             winPanel.SetActive(true);
         }
-        else
-        {
-            MiddlePoint();
-        }
+            isMoving = true; // Set the flag to indicate that the cat is moving
+
+            // Trigger the jump animation
+            CatAnimator.SetTrigger("Jump");
+
+            // Wait for a brief moment to allow the jump animation to start
+            yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
+
+            // Move the cat to the new position (you can use physics-based or keyframe animation here)
+            float jumpDuration = 0.7f; // Adjust the jump duration
+            float elapsedTime = 0;
+            Vector3 initialPosition = CatCharacter.transform.position;
+
+            while (elapsedTime < jumpDuration)
+            {
+                float t = elapsedTime / jumpDuration;
+                CatCharacter.transform.position = Vector3.Lerp(initialPosition, targetPosition, t);
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+
+            // Ensure the cat reaches the exact target position
+            CatCharacter.transform.position = targetPosition;
+
+            // Reset the flag
+            isMoving = false;
+
+            // Check if the cat reached a border
+            if (AllHexagon[middlePoint].CompareTag("Border"))
+            {
+                Debug.Log("Game overr");
+                winn = true;
+                //winPanel.SetActive(true);
+            }
+            else
+            {
+                MiddlePoint();
+            }
     }
 
 
