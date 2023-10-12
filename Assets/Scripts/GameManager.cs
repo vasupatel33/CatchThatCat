@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject HexagonObj, ParentObj, winPanel;
+    [SerializeField] GameObject HexagonObj, ParentObj, winPanel, GameOverPanel;
     [SerializeField] List<GameObject> AllHexagon, evenObject, oddObject, clickedObjectList, PossibilityObjectList;
     [SerializeField] Animator CatAnimator;
     [SerializeField] GameObject CatCharacter;
@@ -189,11 +189,19 @@ public class GameManager : MonoBehaviour
             AllHexagon[middlePoint].gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
             AllHexagon[middlePoint].gameObject.GetComponent<PolygonCollider2D>().enabled = true;
             int val = Random.Range(0, PossibilityObjectList.Count);
-            middlePoint = int.Parse(PossibilityObjectList[val].gameObject.name);
-            Vector3 targetPosition = AllHexagon[middlePoint].transform.position;
+            if (PossibilityObjectList.Count == 0)
+            {
+                Debug.Log("No move available");
+                GameOverPanel.SetActive(true);
+            }
+            else
+            {
+                middlePoint = int.Parse(PossibilityObjectList[val].gameObject.name);
+                Vector3 targetPosition = AllHexagon[middlePoint].transform.position;
 
-            // Start the jump animation coroutine
-            StartCoroutine(PlayJumpAnimation(targetPosition));
+                // Start the jump animation coroutine
+                StartCoroutine(PlayJumpAnimation(targetPosition));
+            }
         }
     }
     bool winn;
