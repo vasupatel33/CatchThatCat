@@ -141,7 +141,6 @@ public class GameManager : MonoBehaviour
     //    }
     //}
     List<GameObject> itemsToRemove = new List<GameObject>();
-    bool win;
     public void CheckObject()
     {
         for (int i = 0; i < PossibilityObjectList.Count; i++)
