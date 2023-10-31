@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
                 no++;
                 if(i==1 || i==11 || j==2 || j==1)
                 {
-                    game.GetComponent<SpriteRenderer>().color = Color.blue;
+                    //game.GetComponent<SpriteRenderer>().color = Color.blue;
                     game.tag = "Border";
                 }
 
@@ -242,6 +243,7 @@ public class GameManager : MonoBehaviour
             if (AllHexagon[middlePoint].CompareTag("Border"))
             {
                 Debug.Log("Game overr");
+                GameOverPanel.SetActive(true);
                 winn = true;
                 //winPanel.SetActive(true);
             }
@@ -250,6 +252,9 @@ public class GameManager : MonoBehaviour
                 MiddlePoint();
             }
     }
-
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(1);
+    }
 
 }
