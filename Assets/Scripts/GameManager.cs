@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject HexagonObj, ParentObj, winPanel, GameOverPanel;
+    [SerializeField] GameObject HexagonObj, ParentObj, winPanel, GameOverPanel, CatObject;
     [SerializeField] List<GameObject> AllHexagon, evenObject, oddObject, clickedObjectList, PossibilityObjectList;
     [SerializeField] Animator CatAnimator;
     [SerializeField] GameObject CatCharacter;
@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        CatObject.SetActive(true);
         middlePoint = 60;
         instance = this;
         for (int i = 1; i <= 11; i++)
@@ -192,7 +193,8 @@ public class GameManager : MonoBehaviour
             if (PossibilityObjectList.Count == 0)
             {
                 Debug.Log("No move available");
-                GameOverPanel.SetActive(true);
+                winPanel.SetActive(true);
+                CatObject.SetActive(false);
             }
             else
             {
@@ -243,6 +245,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Game overr");
                 GameOverPanel.SetActive(true);
+                CatObject.SetActive(false);
                 winn = true;
                 //winPanel.SetActive(true);
             }

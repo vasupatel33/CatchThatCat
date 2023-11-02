@@ -770,7 +770,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -89, y: 157.28}
+  m_AnchoredPosition: {x: 0, y: 283}
   m_SizeDelta: {x: 1392.45, y: 348.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &840848860
@@ -903,6 +903,7 @@ MonoBehaviour:
   ParentObj: {fileID: 300613645}
   winPanel: {fileID: 1434240838}
   GameOverPanel: {fileID: 738951473}
+  CatObject: {fileID: 1108129681}
   AllHexagon: []
   evenObject: []
   oddObject: []
@@ -1027,10 +1028,10 @@ RectTransform:
   - {fileID: 840848859}
   m_Father: {fileID: 1434240842}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1094976949
 MonoBehaviour:
@@ -2633,11 +2634,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4361374554138886284, guid: 9fedecbd1aa68924b816f15cb97e611a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: -54
       objectReference: {fileID: 0}
     - target: {fileID: 4361374554138886284, guid: 9fedecbd1aa68924b816f15cb97e611a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -127
+      value: -26
       objectReference: {fileID: 0}
     - target: {fileID: 4361374554138886284, guid: 9fedecbd1aa68924b816f15cb97e611a, type: 3}
       propertyPath: m_LocalPosition.z
