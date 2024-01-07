@@ -245,6 +245,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Game overr");
                 GameOverPanel.SetActive(true);
+
                 CatObject.SetActive(false);
                 winn = true;
                 //winPanel.SetActive(true);
@@ -257,6 +258,10 @@ public class GameManager : MonoBehaviour
     public void RestartScene()
     {
         SceneManager.LoadScene(1);
+    }
+    public void HomeScene()
+    {
+        SceneManager.LoadScene(0);
     }
 
 }
