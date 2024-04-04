@@ -90,12 +90,12 @@ public class GameManager : MonoBehaviour
 
         if (oddObject.Contains(AllHexagon[middlePoint]))
         {
-            //AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint - 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint + 12].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint + 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint - 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint - 10].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 12].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 10].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
 
             PossibilityObjectList.Add(AllHexagon[middlePoint + 1]);
             PossibilityObjectList.Add(AllHexagon[middlePoint - 1]);
@@ -106,12 +106,12 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            //AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint - 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint + 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint + 10].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint - 12].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            //AllHexagon[middlePoint - 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 1].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint + 10].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 12].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            AllHexagon[middlePoint - 11].gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
 
             PossibilityObjectList.Add(AllHexagon[middlePoint + 1]);
             PossibilityObjectList.Add(AllHexagon[middlePoint - 1]);
